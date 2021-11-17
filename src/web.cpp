@@ -3,9 +3,9 @@
 #include <ESP8266WebServer.h>
 #include "functions.h"
 
-extern char longStr[], fileSizeStr[], fileName[], userText[], charBuf[];
+extern char longStr[], fileName[], userText[], charBuf[];
 extern ESP8266WebServer server;
-extern uint32_t fileSize, lastScan, bootMillis;
+extern uint32_t lastScan, bootMillis;
 extern File fd, fe, fh;
 extern uint16_t longStrLen;
 extern bool onBattery;

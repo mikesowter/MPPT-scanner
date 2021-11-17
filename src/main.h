@@ -44,9 +44,9 @@ char dateStr[10];
 char timeStr[10];
 
 uint8_t oldMin, oldFive, oldHour, oldDay, oldMonth, PWMmin[8], PWMmax[8];
-uint8_t nanoAddr[8];
-bool nanoOn[8], nanoOT[8], nanoOV[8];
-uint32_t nanoOTSms[8], nanoOVSms[8];
+int nanoAddr[8] = {8,9,10,11,12,13,14,15};
+bool mpptOn[8], mpptOT[8], mpptOV[8];
+uint32_t mpptOTSms[8], mpptOVSms[8];
 char reply[33];
 float Vimin[8], Vimax[8], Pmin[8], Pavg[8], Pmax[8], Iout[8], Vout[8], Thi[8], Tlo[8], Vc[8];
 

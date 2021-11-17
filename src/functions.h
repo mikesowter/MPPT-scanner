@@ -6,6 +6,9 @@ void checkBattery();
 void watchWait(uint32_t timer);
 void checkPromScan();
 void initAmps();
+// mmptControl
+void startMPPT(int n);
+void stopMPPT(int n);
 // energy
 void ampHours(uint8_t bat);
 // network

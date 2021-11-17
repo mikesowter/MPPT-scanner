@@ -18,9 +18,9 @@ void readI2Carray(uint8_t n);
 
 extern float avAmps[], amps[], amps0ref, ref1sec, refmax, refmin;
 extern float Vimin[8], Vimax[8], Pmin[8], Pavg[8], Pmax[8], Iout[8], Vout[8], Thi[8], Tlo[8], Vc[8];
-extern uint8_t nanoAddr[8];
-extern bool nanoOn[8], nanoOT[8], nanoOV[8];
-extern uint32_t nanoOTSms[8], nanoOVSms[8];
+extern int nanoAddr[8];
+extern bool mpptOn[8], mpptOT[8], mpptOV[8];
+extern uint32_t mpptOTSms[8], mpptOVSms[8];
 extern char reply[];
 extern uint8_t PWMmin[8], PWMmax[8];
 
@@ -33,7 +33,7 @@ char mess[100],buf[80];
 void scan2Wire() {
   Serial.printf("\n%s ",timeStamp());
   for (uint8_t nano = 0; nano<NUMNANO ; nano++) {
-    Wire.requestFrom(8, 32);      // request 32 bytes from slave device #8
+    Wire.requestFrom(nanoAddr[nano], 32);      // request 32 bytes from slave device #8
     strcpy(mess,"");
     delay(2);
     arrayPtr = 0;
