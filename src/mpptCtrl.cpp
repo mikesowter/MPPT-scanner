@@ -4,7 +4,6 @@
 #define XON 17
 #define XOFF 19
 
-
 void startMPPT(int n) {
   Wire.beginTransmission(n); // transmit to device addr n
   Wire.write(XON);           // sends one byte

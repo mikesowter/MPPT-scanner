@@ -1,8 +1,7 @@
 #include <arduino.h>
 #include <wire.h>
-#include <ADS1X15.h>
 #include <LittleFS.h>
-
+#define FS_ID LittleFS
 #define NUMNANO 1
 
 void diagMess(const char* mess);
@@ -11,12 +10,12 @@ char* f2s4(float f);
 char* i2sh(uint8_t b);
 char* timeStamp();
 void ampHours(uint8_t bat);
-void tempComp();
-void initAmps();
 uint8_t storeData();
 void readI2Carray(uint8_t n);
+void startMPPT(int n);
+void stopMPPT(int n);
 
-extern float avAmps[], amps[], amps0ref, ref1sec, refmax, refmin;
+extern float avAmps[], amps[];
 extern float Vimin[8], Vimax[8], Pmin[8], Pavg[8], Pmax[8], Iout[8], Vout[8], Thi[8], Tlo[8], Vc[8];
 extern int nanoAddr[8];
 extern bool mpptOn[8], mpptOT[8], mpptOV[8];
@@ -42,6 +41,45 @@ void scan2Wire() {
       reply[arrayPtr++] = c;
     }
     readI2Carray(nano);
+    // check temperature
+    if ( !mpptOT[nano] && Thi[nano] > 70.0 ) {
+      mpptOTSms[nano] = millis();
+      mpptOT[nano] = true;
+      sprintf(mess,"Over temperature in MPPT%d",nano);
+      diagMess(mess);
+      stopMPPT(nano);
+    }
+    else if ( mpptOT[nano] && Thi[nano] < 40.0 ) {
+      mpptOT[nano] = false;
+      sprintf(mess,"Over temperature cancelled in MPPT%d",nano);
+      diagMess(mess);
+      startMPPT(nano);
+    }
+    // check voltage into battery
+    float Vbattery = Vout[nano] - 0.7*Iout[nano];
+    if ( Vbattery > 14.2 ) {
+      mpptOV[nano] = true;
+      sprintf(mess,"Over 14.2V in MPPT%d",nano+1);
+      diagMess(mess);
+      stopMPPT(nano);
+    }
+    else if ( !mpptOV[nano] && Vbattery > 14.0 ) {
+      mpptOVSms[nano] = millis();
+      mpptOV[nano] = true;
+      sprintf(mess,"Float started in MPPT%d",nano+1);
+      diagMess(mess);
+    } // only sit above 14V for one hour max
+    else if ( mpptOV[nano] && (millis()-mpptOVSms[nano]>3600000) ) {
+      mpptOV[nano] = false;
+      sprintf(mess,"Float duration exceeded in MPPT%d",nano+1);
+      diagMess(mess);
+      stopMPPT(nano);
+    }
+    else if ( mpptOV[nano] && Vbattery < 13.5 ) {
+      mpptOV[nano] = false;
+      sprintf(mess,"Float cancelled in MPPT%d",nano+1);
+      diagMess(mess);
+    }
   }
 }
 
