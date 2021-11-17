@@ -29,9 +29,9 @@ uint16_t solEnd[12] = {1736,1722,1712,1658,1633,1611,1613,1641,1718,1746,1758,17
 void minProc() {
   oldMin = minute();
   uint16_t hourMin = 100*hour() + minute();
-  for (uint8_t nano = 0; nano<8; nano++ ) {
-    if ( !mpptOn && hourMin >= solBegin[month()-1]) startMPPT(month()-1);
-    if ( mpptOn && hourMin >= solEnd[month()-1]) stopMPPT(month()-1);
+  for (uint8_t nano = 0; nano<1; nano++ ) {
+    if ( !mpptOn && hourMin >= solBegin[month()-1]) startMPPT(nano);
+    if ( mpptOn && hourMin >= solEnd[month()-1]) stopMPPT(nano);
   }
   // flush files
   fd.flush();

@@ -63,8 +63,6 @@ void helpPage() {
   addCstring("\n");
   addCstring("8.3 filename");
   addCstring("\n");
-  addCstring("day");
-  addCstring("\n");
   addCstring("diags");
   addCstring("\n");
   addCstring("dir");
@@ -73,13 +71,9 @@ void helpPage() {
   addCstring("\n");
   addCstring("deldiags");
   addCstring("\n");
-  addCstring("remerrs");
+  addCstring("delerrs");
   addCstring("\n");
   addCstring("reset");
-  addCstring("\n");
-  addCstring("shutdown");
-  addCstring("\n");
-  addCstring("week");
   addCstring("\n");
   server.send ( 200, "text/plain", longStr );
   //Serial.println(longStr);
