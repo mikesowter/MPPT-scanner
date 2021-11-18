@@ -4,7 +4,7 @@
 #define XON 17
 #define XOFF 19
 
-extern int nanoAddr[];
+extern int nanoAddr[], numNanos;
 extern bool mpptOn[];
 
 void startMPPT(int n) {

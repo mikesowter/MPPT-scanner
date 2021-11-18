@@ -17,7 +17,7 @@ void stopMPPT(int n);
 
 extern float avAmps[], amps[];
 extern float Vimin[8], Vimax[8], Pmin[8], Pavg[8], Pmax[8], Iout[8], Vout[8], Thi[8], Tlo[8], Vc[8];
-extern int nanoAddr[8];
+extern int nanoAddr[8], numNanos;
 extern bool mpptOn[8], mpptOT[8], mpptOV[8];
 extern uint32_t mpptOTSms[8], mpptOVSms[8];
 extern char reply[];
@@ -31,7 +31,7 @@ char mess[100],buf[80];
 
 void scan2Wire() {
   Serial.printf("\n%s ",timeStamp());
-  for (uint8_t nano = 0; nano<NUMNANO ; nano++) {
+  for (uint8_t nano = 0; nano<numNanos ; nano++) {
     Wire.requestFrom(nanoAddr[nano], 32);      // request 32 bytes from slave device #8
     strcpy(mess,"");
     delay(2);
