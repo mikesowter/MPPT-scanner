@@ -55,5 +55,6 @@ uint8_t openFile(const char* s);
 void writeTemps();
 void readTemps();
 void scan2Wire();
+void scanBus();
 
 

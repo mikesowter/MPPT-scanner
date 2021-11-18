@@ -33,7 +33,7 @@ void setup()
 	setupFS();
   // setup as I2C master
 	Wire.begin(SDA,SCL);
-  startMPPT(0);
+  scanBus();
 	// lookup reason for restart
   resetReason.toCharArray(charBuf,resetReason.length()+1);
 	errMess(charBuf);       // restart message
