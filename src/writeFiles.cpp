@@ -8,14 +8,18 @@ uint8_t openFile(const char* s);
 char* timeStamp();
 
 extern File fh;
-extern char charBuf[],fileName[],todayName[];
+extern char charBuf[],todayName[];
+extern int nanoAddr[], numNanos;
+extern float Vimin[], Vimax[], Pmin[], Pavg[], Pmax[], Iout[], Vout[], Thi[], Tlo[];
 
 uint8_t storeData() {
-//  if ( !openFile("a") ) return 0;
-//  fh.printf("%s,%.3f,%.3f\n",timeStamp());
-//  fh.printf("%s,,%.2f,%.2f,%.2f,%.2f,",timeStamp(),amps[0],amps[1],amps[2],amps[3]);
-//  fh.printf("Ah,%.2f,%.2f,%.2f\n",amphrs[1],amphrs[2],amphrs[3]);
-//  fh.close(); 
+  if ( !openFile("a") ) return 0;
+  fh.printf("%s,",timeStamp());
+  for (int n=0; n<numNanos; n++) {
+    fh.printf(",%d, %.2f, %.2f, %.2f, %.2f,",n,Vimin[n],Pavg[n],Vout[n],Thi[n]);
+  }
+  fh.printf("\n");
+  fh.close(); 
   return 1; 
 }
 

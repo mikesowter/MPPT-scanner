@@ -16,12 +16,12 @@ void startMPPT(int n);
 void stopMPPT(int n);
 
 extern float avAmps[], amps[];
-extern float Vimin[8], Vimax[8], Pmin[8], Pavg[8], Pmax[8], Iout[8], Vout[8], Thi[8], Tlo[8], Vc[8];
-extern int nanoAddr[8], numNanos;
-extern bool mpptOn[8], mpptOT[8], mpptOV[8];
-extern uint32_t mpptOTSms[8], mpptOVSms[8];
+extern float Vimin[], Vimax[], Pmin[], Pavg[], Pmax[], Iout[], Vout[], Thi[], Tlo[], Vc[];
+extern int nanoAddr[], numNanos;
+extern bool mpptOn[], mpptOT[], mpptOV[];
+extern uint32_t mpptOTSms[], mpptOVSms[];
 extern char reply[];
-extern uint8_t PWMmin[8], PWMmax[8];
+extern uint8_t PWMmin[], PWMmax[];
 
 float check;
 uint8_t arrayPtr;

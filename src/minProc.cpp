@@ -6,7 +6,7 @@ extern WiFiClient client;
 extern File fh,fd,fe;
 extern volatile int watchDog;
 extern bool onBattery;          // switch to enable sleep if required
-extern bool mpptOn[8], mpptOT[8], mpptOV[8];
+extern bool mpptOn[], mpptOT[], mpptOV[];
 
 extern char fileName[];
 extern char todayName[];
