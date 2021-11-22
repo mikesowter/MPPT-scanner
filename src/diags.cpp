@@ -39,9 +39,7 @@ char* dateStamp() {
   // digital display of the date
   extern char dateStr[];
   strcpy(dateStr,i2sd(year()%100));
-  strcat(dateStr,"-");
   strcat(dateStr,i2sd(month()));
-  strcat(dateStr,"-");
   strcat(dateStr,i2sd(day()));
   return dateStr;
 }

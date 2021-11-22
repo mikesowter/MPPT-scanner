@@ -30,9 +30,9 @@ void minProc() {
   oldMin = minute();
   uint16_t hourMin = 100*hour() + minute();
   for (uint8_t nano = 0; nano<1; nano++ ) {
-    if ( mpptOn[nano] && hourMin < solBegin[month()-1]) stopMPPT(nano);
-    else if ( !mpptOn[nano] && hourMin >= solBegin[month()-1]) startMPPT(nano);
-    else if (  mpptOn[nano] && hourMin >= solEnd[month()-1]) stopMPPT(nano);
+    bool onTime = hourMin >= solBegin[month()-1] && hourMin < solEnd[month()-1];
+    if ( mpptOn[nano] && !onTime) stopMPPT(nano);
+    else if ( !mpptOn[nano] && onTime) startMPPT(nano);
   }
   // flush files
   fd.flush();
