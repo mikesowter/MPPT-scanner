@@ -32,7 +32,7 @@ char mess[100],buf[80];
 void scan2Wire() {
   Serial.printf("\n%s ",timeStamp());
   for (uint8_t nano = 0; nano<numNanos ; nano++) {
-    Wire.requestFrom(nanoAddr[nano], 32);      // request 32 bytes from slave device #8
+    Wire.requestFrom(nanoAddr[nano], 32);      // request 32 bytes from slave device 
     strcpy(mess,"");
     delay(2);
     arrayPtr = 0;
@@ -105,6 +105,6 @@ void readI2Carray(uint8_t n) {
   check = unpackflt();
   Pmin[n] = unpackflt();
   Pmax[n] = unpackflt();
-  Serial.printf("Vin: %.2f-%.2f Iout: %.2f Vout: %.2f Pavg: %.2f Thi: %.2f Tlo: %.2f Vc: %.2f PWM: %d-%d\n",
-          Vimin[n],Vimax[n],Iout[n],Vout[n],Pavg[n],Thi[n],Tlo[n],Vc[n],PWMmin[n],PWMmax[n]);
+  Serial.printf("Vin: %.2f-%.2f Iout: %.2f Vout: %.2f Pavg: %.2f Thi: %.2f Tlo: %.2f ",
+          Vimin[n],Vimax[n],Iout[n],Vout[n],Pavg[n],Thi[n],Tlo[n]);
 } 
