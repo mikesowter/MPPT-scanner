@@ -14,7 +14,7 @@ void setup()
 {
 	bootMillis = millis();
 	Serial.begin(115200);
-	Serial.println("\n\rMPPT scanner 20211122");
+	Serial.println("\n\rMPPT scanner 20211210");
   // setup watch dog
 	secondTick.attach(1,ISRwatchDog);
 	// join local network and internet
