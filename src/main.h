@@ -37,7 +37,7 @@ char fileName[] = "/XXyy-mm-dd.csv";
 char fileSizeStr[10];
 char todayName[] = "/XXyy-mm-dd.csv";
 char userText[] = "/XXyy-mm-dd.csv";
-uint16_t longStrLen = 10000;
+uint16_t replycount,longStrLen = 10000;
 char longStr[10000];
 char charBuf[128];
 char dateStr[10];

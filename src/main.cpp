@@ -1,5 +1,5 @@
 /* 
-Scans MPPT nano controllers to make data available to prometheus
+Scans MPPT nano controllers to make data available 
 monitors over-temperature and over-voltage conditions
 logs major activity
 cycles the nanos on and off by time of day calendar
@@ -13,8 +13,8 @@ Mike Sowter - November 2021 */
 void setup()
 {
 	bootMillis = millis();
-	Serial.begin(115200);
-	Serial.println("\n\rMPPT scanner 20211210");
+	Serial.begin(57600);
+	Serial.println("\n\rMPPT scanner 20220111");
   // setup watch dog
 	secondTick.attach(1,ISRwatchDog);
 	// join local network and internet

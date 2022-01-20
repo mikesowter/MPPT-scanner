@@ -22,6 +22,7 @@ extern bool mpptOn[], mpptOT[], mpptOV[];
 extern uint32_t mpptOTSms[], mpptOVSms[];
 extern char reply[];
 extern uint8_t PWMmin[], PWMmax[];
+extern uint16_t replycount;
 
 float check;
 uint8_t arrayPtr;
@@ -80,6 +81,7 @@ void scan2Wire() {
       sprintf(mess,"Float cancelled in MPPT%d",nano+1);
       diagMess(mess);
     }
+    Serial.printf("reply count: %d", replycount);
   }
 }
 
@@ -100,11 +102,12 @@ void readI2Carray(uint8_t n) {
   Thi[n] = unpackflt();
   Tlo[n] = unpackflt();
   Vc[n] = unpackflt();
-  PWMmin[n] = reply[arrayPtr++];
+  PWMmin[n] = reply[arrayPtr++];  // reply[16]
   PWMmax[n] = reply[arrayPtr++];
   check = unpackflt();
   Pmin[n] = unpackflt();
   Pmax[n] = unpackflt();
-  Serial.printf("Vin: %.2f-%.2f Iout: %.2f Vout: %.2f Pavg: %.2f Thi: %.2f Tlo: %.2f ",
-          Vimin[n],Vimax[n],Iout[n],Vout[n],Pavg[n],Thi[n],Tlo[n]);
+  replycount = unpackflt();
+  Serial.printf("\n%x Vin: %5.2f-%4.2f Iout: %3.2f Vout: %.2f Pavg: %.2f Thi: %.2f Tlo: %.2f ",
+          n,Vimin[n],Vimax[n],Iout[n],Vout[n],Pavg[n],Thi[n],Tlo[n]);
 } 
